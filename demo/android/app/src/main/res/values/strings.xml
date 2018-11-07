@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">SentryDemo</string>
+    <string name="title_activity_main">SentryDemo</string>
+    <string name="package_name">com.meetmaestro.hive.capacitor.sentry.demo</string>
+    <string name="fileprovider_authority">com.meetmaestro.hive.capacitor.sentry.demo.fileprovider</string>
+    <string name="custom_url_scheme">com.meetmaestro.hive.capacitor.sentry.demo</string>
+</resources>

@@ -1,0 +1,6 @@
+{
+  "appId": "com.meetmaestro.hive.capacitor.sentry.demo",
+  "appName": "SentryDemo",
+  "bundledWebRuntime": false,
+  "webDir": "www"
+}

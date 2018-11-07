@@ -1,0 +1,43 @@
+PODS:
+  - Capacitor (1.0.0-beta.7):
+    - CapacitorCordova (= 1.0.0-beta.7)
+    - GCDWebServer (~> 3.0)
+  - CapacitorCordova (1.0.0-beta.7)
+  - GCDWebServer (3.4.2):
+    - GCDWebServer/Core (= 3.4.2)
+  - GCDWebServer/Core (3.4.2)
+  - Sentry (4.1.0):
+    - Sentry/Core (= 4.1.0)
+  - Sentry/Core (4.1.0)
+  - TeamhiveCapacitorSentry (0.0.1):
+    - Capacitor
+    - Sentry (~> 4.1.0)
+
+DEPENDENCIES:
+  - "Capacitor (from `../../node_modules/@capacitor/ios`)"
+  - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
+  - TeamhiveCapacitorSentry (from `../../../src`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - GCDWebServer
+    - Sentry
+
+EXTERNAL SOURCES:
+  Capacitor:
+    :path: "../../node_modules/@capacitor/ios"
+  CapacitorCordova:
+    :path: "../../node_modules/@capacitor/ios"
+  TeamhiveCapacitorSentry:
+    :path: "../../../src"
+
+SPEC CHECKSUMS:
+  Capacitor: 9ac2a5280a36cac49f834d692a6cd92ebb40bf20
+  CapacitorCordova: 7e499cf9d764cdc8958858065d3feacd53793ae5
+  GCDWebServer: 8d67ee9f634b4bb91eb4b8aee440318a5fc6debd
+  Sentry: 44b85e768f435ede4d12ea279af588ff275c3939
+  TeamhiveCapacitorSentry: 2022bfdff43a1346caee3d7495352d1c3b453a39
+
+PODFILE CHECKSUM: fe18dd83124aea45383cec184a8b62b2847505b0
+
+COCOAPODS: 1.5.3
