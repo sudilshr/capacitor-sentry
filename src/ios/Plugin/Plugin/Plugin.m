@@ -3,7 +3,7 @@
 
 // Define the plugin using the CAP_PLUGIN Macro, and
 // each method the plugin supports using the CAP_PLUGIN_METHOD macro.
-CAP_PLUGIN(SentryPlugin, "SentryPlugin",
+CAP_PLUGIN(SentryPlugin, "Sentry",
            CAP_PLUGIN_METHOD(initialize, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(crash, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(setUser, CAPPluginReturnPromise);

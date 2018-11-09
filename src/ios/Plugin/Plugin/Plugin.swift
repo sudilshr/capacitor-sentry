@@ -49,7 +49,6 @@ public class SentryPlugin: CAPPlugin {
         call.resolve();
     }
     
-    
     @objc func setTags(_ call: CAPPluginCall){
         if(Client.shared?.tags == nil){
             Client.shared?.tags = [:]
@@ -89,8 +88,8 @@ public class SentryPlugin: CAPPlugin {
         })
     }
     
-    
     @objc func captureException(_ call: CAPPluginCall){
+        /*
         let name: String = call.getString("name") ?? ""
         let reason: String = call.getString("reason") ?? ""
         let language: String = call.getString("language") ?? ""
@@ -98,16 +97,38 @@ public class SentryPlugin: CAPPlugin {
         let stackTrace: [Any] = call.get("stackTrace", [Any].self) ?? []
         let logAllThreads: Bool =  call.getBool("logAllThreads") ?? false
         let terminateProgram: Bool = call.getBool("terminateProgram") ?? false
-        Client.shared?.reportUserException(name, reason: reason, language: language, lineOfCode: lineOfCode, stackTrace: stackTrace, logAllThreads: logAllThreads, terminateProgram: terminateProgram)
+        */
+        
+       let exception =  call.getObject("exception");
+        if(exception == nil){
+            call.reject("Exception empty")
+            return;
+        }
+        
+        Client.shared?.reportUserException(exception?["name"] as! String, reason: exception?["message"] as! String, language: "", lineOfCode: "", stackTrace: [exception?["stack"] as! String], logAllThreads: true, terminateProgram: false)
+        
         call.resolve();
     }
     
     @objc func captureBreadcrumb(_ call: CAPPluginCall){
+        let crumb:Breadcrumb = Breadcrumb.init(level: SentrySeverity.debug, category: "")
         let level = call.getString("level") ?? "debug"
         let category = call.getString("category") ?? ""
         let message = call.getString("message") ?? ""
         let timeStamp = call.getString("timeStamp") ?? ""
-        let crumb:Breadcrumb = Breadcrumb.init(level: SentrySeverity.info, category: level)
+        switch level {
+        case "info":
+            crumb.level = SentrySeverity.info
+        case "warning":
+            crumb.level = SentrySeverity.warning
+        case "error":
+            crumb.level = SentrySeverity.error
+        case "critical":
+            crumb.level = SentrySeverity.fatal
+        default:
+            crumb.level = SentrySeverity.debug
+        }
+        
         crumb.category = category
         crumb.message = message
         let dateFormatter = DateFormatter()
