@@ -15,7 +15,7 @@ import '@teamhive/capacitor-sentry';
 
 import { Plugins } from '@capacitor/core';
 const { Sentry } = Plugins;
-Sentry.init({
+Sentry.initialize({
     dsn:"dsn"
 });
 ```
@@ -24,7 +24,7 @@ Sentry.init({
 
 | Method                                               | Default | Type                      | Description                 |
 | ---------------------------------------------------- | ------- | ------------------------- | --------------------------- |
-| init(options: { dsn: string }) |         | `Promise<any>` |  |
+| initialize(options: { dsn: string }) |         | `Promise<any>` |  |
 | crash() |         |  |  Call to crash app  |
 | setUser({id:string,email:string,username:string,ip:string,extra:Object }) |         |  |    |
 | setTags({tags:Object}) |         |  |  |
