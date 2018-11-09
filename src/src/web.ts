@@ -2,7 +2,6 @@ import { WebPlugin } from '@capacitor/core';
 import { SentryPlugin } from './definitions';
 
 export class SentryPluginWeb extends WebPlugin implements SentryPlugin {
-
   constructor() {
     super({
       name: 'Sentry',
@@ -10,8 +9,8 @@ export class SentryPluginWeb extends WebPlugin implements SentryPlugin {
     });
   }
 
-  initialize(options: { dsn: string; }): Promise<any> {
-    console.log('hasOptions:', !!options)
+  initialize(options: { dsn: string }): Promise<any> {
+    console.log('hasOptions:', !!options);
     return Promise.resolve();
   }
   crash(): Promise<any> {
@@ -40,6 +39,6 @@ export class SentryPluginWeb extends WebPlugin implements SentryPlugin {
   }
 }
 
-const SentryPlugin = new SentryPluginWeb();
+const Sentry = new SentryPluginWeb();
 
-export { SentryPlugin };
+export { Sentry };
