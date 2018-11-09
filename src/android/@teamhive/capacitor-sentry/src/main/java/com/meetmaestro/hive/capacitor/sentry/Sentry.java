@@ -15,8 +15,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.TimeZone;
-
-import io.sentry.Sentry;
 import io.sentry.android.AndroidSentryClientFactory;
 import io.sentry.event.Breadcrumb;
 import io.sentry.event.BreadcrumbBuilder;
@@ -24,14 +22,14 @@ import io.sentry.event.EventBuilder;
 import io.sentry.event.UserBuilder;
 
 @NativePlugin()
-public class SentryPlugin extends Plugin {
+public class Sentry extends Plugin {
 
     @PluginMethod()
     public void initialize(PluginCall call) {
         String dsn = call.getString("dsn");
         try {
             Context ctx = getContext();
-            Sentry.init(dsn, new AndroidSentryClientFactory(ctx));
+            io.sentry.Sentry.init(dsn, new AndroidSentryClientFactory(ctx));
             call.success();
         } catch (Exception e) {
             call.error(e.getMessage());
@@ -40,7 +38,7 @@ public class SentryPlugin extends Plugin {
 
     @PluginMethod()
     public void crash() {
-        throw new RuntimeException("TEST - Sentry Client Crash");
+        throw new RuntimeException();
     }
 
     @PluginMethod()
@@ -74,10 +72,9 @@ public class SentryPlugin extends Plugin {
             builder.setData(dataMap);
         }
 
-        Sentry.getContext().setUser(builder.build());
+        io.sentry.Sentry.getContext().setUser(builder.build());
         call.resolve();
     }
-
 
     @PluginMethod()
     public void setTags(PluginCall call) {
@@ -86,7 +83,7 @@ public class SentryPlugin extends Plugin {
         if (keys.hasNext()) {
             String key = keys.next();
             String item = tags.getString(key);
-            Sentry.getContext().addTag(key, item);
+            io.sentry.Sentry.getContext().addTag(key, item);
         }
         call.resolve();
     }
@@ -98,14 +95,14 @@ public class SentryPlugin extends Plugin {
         if (keys.hasNext()) {
             String key = keys.next();
             Object item = tags.opt(key);
-            Sentry.getContext().addExtra(key, item);
+            io.sentry.Sentry.getContext().addExtra(key, item);
         }
         call.resolve();
     }
 
     @PluginMethod()
     public void clearContext(PluginCall call) {
-        Sentry.clearContext();
+        io.sentry.Sentry.clearContext();
         call.resolve();
     }
 
@@ -114,7 +111,7 @@ public class SentryPlugin extends Plugin {
         String message = call.getString("message");
         EventBuilder eventBuilder = new EventBuilder();
         eventBuilder.withMessage(message);
-        Sentry.capture(eventBuilder.build());
+        io.sentry.Sentry.capture(eventBuilder.build());
         call.resolve();
     }
 
@@ -122,10 +119,9 @@ public class SentryPlugin extends Plugin {
     public void captureException(PluginCall call) {
         JSObject exception = call.getObject("exception");
         Exception e = new Exception(exception.getString("message"), new Throwable(exception.getString("stack")));
-        Sentry.capture(e);
+        io.sentry.Sentry.capture(e);
         call.resolve();
     }
-
 
     private Date fromISO8601UTC(String date) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
@@ -186,7 +182,7 @@ public class SentryPlugin extends Plugin {
                 return;
             }
         }
-        Sentry.getContext().recordBreadcrumb(builder.build());
+        io.sentry.Sentry.getContext().recordBreadcrumb(builder.build());
         call.resolve();
     }
 
