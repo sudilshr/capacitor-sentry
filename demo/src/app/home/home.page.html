@@ -7,6 +7,12 @@
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs">docs</a> will be your guide.</p>
+<ion-button (click)="crash($event)"> Crash </ion-button>
+<ion-button (click)="setUser($event)"> Set User </ion-button>
+<ion-button (click)="setTags($event)"> Set Tags </ion-button>
+<ion-button (click)="setExtra($event)"> Set Extra </ion-button>
+<ion-button (click)="clearContext($event)"> ClearContext </ion-button>
+<ion-button (click)="captureMessage($event)"> Capture Message </ion-button>
+<ion-button (click)="captureException($event)"> Capture Exception </ion-button>
+<ion-button (click)="captureBreadcrumb($event)"> Capture Breadcrumb </ion-button>
 </ion-content>
