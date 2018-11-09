@@ -15,8 +15,9 @@ import '@teamhive/capacitor-sentry';
 
 import { Plugins } from '@capacitor/core';
 const { Sentry } = Plugins;
-Sentry.init();
-
+Sentry.init({
+    dsn:"dsn"
+});
 ```
 
 ## Api
