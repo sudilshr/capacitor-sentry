@@ -8,8 +8,10 @@ public class SentryPlugin: CAPPlugin {
     
     @objc func initialize(_ call: CAPPluginCall) {
         let dsn = call.getString("dsn") ?? ""
+        let environment = call.getString("environment") ?? ""
+        let release = call.getString("release") ?? ""
         do{
-            Client.shared  =  try Client.init(dsn:dsn )
+            Client.shared = try Client.init(options: ["dsn" :dsn, "environment": environment, "release": release])
             try Client.shared?.startCrashHandler()
             call.success()
         }catch let error{
